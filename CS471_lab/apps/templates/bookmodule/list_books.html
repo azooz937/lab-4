@@ -1,0 +1,49 @@
+{% extends "bookmodule/layouts/base.html" %}
+
+{% load static %}
+
+{% block title %} List of Books {% endblock title %}
+
+{% block content %}
+<style>
+    /* Add internal CSS */
+    h1 {
+        color: green;
+    }
+
+    h2 {
+        color: lightskyblue;
+    }
+
+    p {
+        font-family: Verdana, sans-serif;
+        font-size: 20px;
+    }
+
+    .book-item {
+        margin-bottom: 20px;
+    }
+
+    .book-item img {
+        display: block;
+        margin-top: 10px;
+    }
+</style>
+
+<h1>List of Books</h1>
+
+{% for book in books %}
+<div class="book-item">
+    <a href="{% url 'books.view_one_book' book.id %}">
+        <h2>{{ book.title }}</h2>
+    </a>
+    <a href="{% url 'books.view_one_book' book.id %}">
+        <img src="{% static book.image %}" alt="{{ book.title }} image" width="200" height="200">
+    </a>
+    <hr>
+</div>
+{% empty %}
+<p>No books available at the moment.</p>
+{% endfor %}
+
+{% endblock content %}
